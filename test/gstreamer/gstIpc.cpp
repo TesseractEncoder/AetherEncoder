@@ -46,12 +46,12 @@ int GSTElement::createEncodingPipe()
 
 }*/
 
-void controlButton(string msg)
+void controlButton(GSTElement GE)
 {
-    cout << msg << endl;
+    cout << "i am thread" << endl;
     int i;
 
-    GSTElement GE;
+   // GSTElement GE;
 
     while(true)
     {
@@ -69,7 +69,7 @@ void controlButton(string msg)
                 gst_element_set_state (GE.P2, GST_STATE_PLAYING);
                 break;
             default:
-                gst_element_set_state (GE.P2, GST_STATE_PLAYING);
+                gst_element_set_state (GE.P2, GST_STATE_NULL);
                 break;
             }
     }
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
     gst_element_set_state (GE.P1, GST_STATE_PLAYING);
     gst_element_set_state (GE.P2, GST_STATE_PLAYING);
 
-    thread t1(controlButton, "Hello");
+    thread t1(controlButton,GE);
     t1.join();
     
     /* Create a GLib Main Loop and set it to run */
