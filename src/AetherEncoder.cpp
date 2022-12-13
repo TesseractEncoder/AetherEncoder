@@ -5,13 +5,18 @@
 
 using namespace std;
 
+
+//void creteNewPipeline()
+
 void controlButton(gstEncodeElement GE,createRtmpPipe RP,AetherAction AA)
 {
     cout << "i am thread" << endl;
     int i;
-    bool S1=true, S2=true;
+    bool S1=true, S2=true, S3=true, S4=true;
     GstStateChangeReturn ret;
-    createRtmpPipe *newRtmpPipe = new createRtmpPipe;
+    createRtmpPipe *newRtmpPipe1 = new createRtmpPipe;
+    createRtmpPipe *newRtmpPipe2 = new createRtmpPipe;
+    createRtmpPipe *newRtmpPipe3 = new createRtmpPipe;
     while(true)
     {
             cout << "waiting for key input" << endl;
@@ -22,34 +27,57 @@ void controlButton(gstEncodeElement GE,createRtmpPipe RP,AetherAction AA)
             case 1:
                 cout << "get key 1" << endl;
                 if(S1){
-                    ret=gst_element_set_state (RP.P1, GST_STATE_PAUSED);
-                    g_print("youtube pipe OFF\n");
+                    ret=gst_element_set_state(RP.P1, GST_STATE_PAUSED);
+                    g_usleep(100);
+                    gst_element_set_state(RP.P1, GST_STATE_NULL);
+                    RP.freeRtmpPipe();
+                    g_print("youtube 1 pipe OFF\n");
                 }
                 else{
-                    gst_element_set_state (RP.P1, GST_STATE_READY);
-                    g_usleep(500);
-                    ret=gst_element_set_state (RP.P1, GST_STATE_PLAYING);
-                    g_print("youtube pipe ON\n");
+                    RP.rtmpPipe(string("0dvg-jqed-4vc4-g6az-1qgd"));
+                    g_print("youtube 1 pipe ON\n");
                 }
                 S1=!S1;
                 break;
             case 2:
                 cout << "get key 2" << endl;
-                RP.freeRtmpPipe();
+                if(S2){
+                    newRtmpPipe1->rtmpPipe(string("2mzg-vv14-75b3-746m-9xxz"));
+                        g_print("youtube 2 pipe ON\n");
+                }
+                else{
+                    newRtmpPipe1->freeRtmpPipe();
+                  //  delete newRtmpPipe1;
+                    g_print("youtube 2 pipe OFF\n");
+                }
+                S2=!S2;
                 break;
             case 3:
                 cout << "get key 3" << endl;
-                RP.rtmpPipe(string("0dvg-jqed-4vc4-g6az-1qgd"));
+                if(S3){
+                    newRtmpPipe2->rtmpPipe(string("4rgs-wmqe-t00b-zm63-9adu"));
+                        g_print("youtube 3 pipe ON\n");
+                }
+                else{
+                    newRtmpPipe2->freeRtmpPipe();
+                   // delete newRtmpPipe2;
+                    g_print("youtube 3 pipe OFF\n");
+                }
+                S3=!S3;
                 break;
+                 
             case 4:
                 cout << "get key 4" << endl;
-               
-               newRtmpPipe->rtmpPipe(string("bfa2-41gs-vz04-wcje-05u9"));
-                break;
-            case 5:
-                cout << "get key 5" << endl;
-                 newRtmpPipe->freeRtmpPipe();
-               delete newRtmpPipe;
+                if(S4){
+                    newRtmpPipe3->rtmpPipe(string("xwgw-61wf-wdbj-qrpr-cmgb"));
+                        g_print("youtube 4 pipe ON\n");
+                }
+                else{
+                    newRtmpPipe3->freeRtmpPipe();
+                    //delete newRtmpPipe3;
+                    g_print("youtube 4 pipe OFF\n");
+                }
+                S4=!S4;
                 break;
             default:
                 //gst_element_set_state (GE.P2, GST_STATE_NULL);
