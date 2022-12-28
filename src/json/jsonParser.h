@@ -44,9 +44,18 @@ struct output{
     struct TYPE type; 
 };
 
+struct youtube{
+    string streamto;		
+	string active;
+	string key ;
+	string link;
+    int youtubeNO;
+};
+
 struct jsonParameter{
     struct input in;
     struct output out;
+    struct youtube ytb[10]; 
 };
 
 class AetherAction{
@@ -54,13 +63,18 @@ class AetherAction{
         Json::Reader reader;  //for reading the data
         Json::Value root; //for modifying and storing new values
         Json::StyledStreamWriter writer; //for writing in json files
+       // struct jsonParameter JP[10];
+       // bool status;
+        
         
     public:
-        jsonParameter parseJson(string fpath);
+        jsonParameter parseJson(string fpath, jsonParameter *JP);
         int updateJson(string path);
         int showJsonContain(string path);
         string showJsonValueStr(string key, string value);
         int showJsonValueInt(string key, int value);
+        bool fileExist(string filePath);
+        jsonParameter parseYtbJson(string fpath, jsonParameter *JP, int* ch);
 };
 
 #endif
