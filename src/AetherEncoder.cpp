@@ -7,7 +7,7 @@ using namespace std;
 
 
 //void creteNewPipeline()
-
+/*
 void controlButton(gstEncodeElement GE,createRtmpPipe RP,AetherAction AA)
 {
     cout << "i am thread" << endl;
@@ -42,7 +42,7 @@ void controlButton(gstEncodeElement GE,createRtmpPipe RP,AetherAction AA)
             case 2:
                 cout << "get key 2" << endl;
                 if(S2){
-                    newRtmpPipe1->rtmpPipe(string("2mzg-vv14-75b3-746m-9xxz"));
+                    newRtmpPipe1->rtmpPipe(string("y7j5-27m0-9ztd-6hb1-2kzt"));
                         g_print("youtube 2 pipe ON\n");
                 }
                 else{
@@ -55,7 +55,7 @@ void controlButton(gstEncodeElement GE,createRtmpPipe RP,AetherAction AA)
             case 3:
                 cout << "get key 3" << endl;
                 if(S3){
-                    newRtmpPipe2->rtmpPipe(string("4rgs-wmqe-t00b-zm63-9adu"));
+                    newRtmpPipe2->rtmpPipe(string("xj8u-t5jt-kx5c-krej-46mf"));
                         g_print("youtube 3 pipe ON\n");
                 }
                 else{
@@ -69,7 +69,7 @@ void controlButton(gstEncodeElement GE,createRtmpPipe RP,AetherAction AA)
             case 4:
                 cout << "get key 4" << endl;
                 if(S4){
-                    newRtmpPipe3->rtmpPipe(string("xwgw-61wf-wdbj-qrpr-cmgb"));
+                    newRtmpPipe3->rtmpPipe(string("uz6e-p266-zpgb-uzhy-6c76"));
                         g_print("youtube 4 pipe ON\n");
                 }
                 else{
@@ -91,33 +91,52 @@ void controlButton(gstEncodeElement GE,createRtmpPipe RP,AetherAction AA)
         }
     }
 }
+*/
 
+int handleYoutubePipeline(struct jsonParameter *YJP, createRtmpPipe *newRtmpPipe, int ch)
+{
+   // int ch;
+    
+    if(YJP[0].ytb[ch].active == "start"){
+        //createRtmpPipe *newRtmpPipe1 = new createRtmpPipe;
+        newRtmpPipe[ch].rtmpPipe(YJP[0].ytb[ch].key, YJP[0].ytb[ch].streamto);
+    }
+    else if(YJP[0].ytb[ch].active == "stop") {
+        newRtmpPipe[YJP[0].ytb[ch].youtubeNO].freeRtmpPipe();
+                //delete &newRtmpPipe[YJP.ytb.youtubeNO];
+    }
 
+    return 0;
+}
 int main(int argc, char *argv[])
 {
-    AetherAction AA;
     gstEncodeElement GE;
     createRtmpPipe RP;
-    struct jsonParameter JP;
+    AetherAction AA;
+    struct jsonParameter *JP = new jsonParameter[8];
+    createRtmpPipe *newRtmpPipe = new createRtmpPipe[8];
+    int ytbch;
     cout<< "Initialization gstreamer\n" << endl;
     gst_init (&argc, &argv);
 
     //parse json file
-    JP=AA.parseJson("../sample.json");
-    
+    JP[0]=AA.parseJson("../sample.json",JP);
+
     cout<< "setup encoding pipe" << endl;
     GE.createEncodePipe(AA);
 
-    cout<< "setup RTMP pipe" << endl;
-    RP.rtmpPipe(string("0dvg-jqed-4vc4-g6az-1qgd"));
+    while(true)
+    {
+        string filePath="../cmd/ytb.json";
+        g_usleep(1000000);
+        if(AA.fileExist(filePath)){
+            cout << "call youtube json parser" << endl;
+            JP[0] = AA.parseYtbJson(filePath, JP, &ytbch);
+            handleYoutubePipeline(JP,newRtmpPipe,ytbch); 
+            remove(filePath.c_str());
+        }
+    }
 
-    thread t1(controlButton,GE,RP,AA);
-    t1.join();
-
-
-
-    RP.freeRtmpPipe();
-    GE.freeEncodePipe();
-    
-
+    //RP.freeRtmpPipe();
+    GE.freeEncodePipe();   
 }
