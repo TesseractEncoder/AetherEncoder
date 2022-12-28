@@ -17,7 +17,7 @@ class gstEncodeElement{
         GError *error = NULL;
         GstStateChangeReturn ret;
         GIOChannel *io_stdin;
-       // GMainLoop *loop;
+        GstState state;
        // GstElement *P;
        // GstBus *bus;
 
@@ -38,11 +38,11 @@ class createRtmpPipe{
         GstElement *P1;
         GstBus *bus1;
         GError *error = NULL;
+        GstState state;
     public:
-        void rtmpPipe(string rtmpKey);
-        void freeRtmpPipe();
+        int rtmpPipe(string rtmpKey, string node);
+        void freeRtmpPipe();       
 };
 
-//int check_gstreamer(void);
 
 #endif
