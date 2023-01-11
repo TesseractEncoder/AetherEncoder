@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/gstapp.dir/gst.cpp.o  -o gstapp   -L/usr/local/lib/x86_64-linux-gnu  -Wl,-rpath,/usr/local/lib/x86_64-linux-gnu -lgstcheck-1.0 -lm -lrt -lgstreamer-1.0 -lgobject-2.0 -lglib-2.0 

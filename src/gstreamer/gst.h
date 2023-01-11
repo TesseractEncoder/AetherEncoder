@@ -9,7 +9,7 @@
 class gstEncodeElement{
     public:
         GMainLoop *loop;
-        GstElement *P, *src, *vconv, *vrate,*capsfiltersrc, *capsfilterRate, *queue;
+        GstElement *P, *src, *vconv, *vrate,*capsfiltersrc, *capsfilterRate, *queue, *encoder, *muxer, *filesink, *videoconvert, *videosink, *queue_record, *parse;
         GstElement *mux, *sink, *H264Encode, *H264Parse, *capsfilterConvert, *capsfilterH264enc;
         GstCaps *srccaps,*capsRate,*capsConvert, *capsH264enc;   
         GstBus *bus;
@@ -18,12 +18,14 @@ class gstEncodeElement{
         GstStateChangeReturn ret;
         GIOChannel *io_stdin;
         GstState state;
-       // GstElement *P;
-       // GstBus *bus;
+        GstPad *teepad;
+        gboolean recording = FALSE;
 
     public:
         int createEncodePipe(AetherAction AA);
         int freeEncodePipe();
+        void startRecording();
+        void stopRecording();
 };
 
 class createMulticastPipe{
@@ -40,7 +42,7 @@ class createRtmpPipe{
         GError *error = NULL;
         GstState state;
     public:
-        int rtmpPipe(string rtmpKey, string node);
+        int rtmpPipe(string rtmplink, string node);
         void freeRtmpPipe();       
 };
 

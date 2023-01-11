@@ -1,0 +1,3 @@
+/home/nityanand/AetherEncoder_v0.2/test/gstreamer/CMakeFiles/rebuild_cache.dir
+/home/nityanand/AetherEncoder_v0.2/test/gstreamer/CMakeFiles/edit_cache.dir
+/home/nityanand/AetherEncoder_v0.2/test/gstreamer/CMakeFiles/gstapp.dir

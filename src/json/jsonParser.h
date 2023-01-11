@@ -63,7 +63,7 @@ class AetherAction{
         Json::Reader reader;  //for reading the data
         Json::Value root; //for modifying and storing new values
         Json::StyledStreamWriter writer; //for writing in json files
-       // struct jsonParameter JP[10];
+        struct jsonParameter JP[10];
        // bool status;
         
         

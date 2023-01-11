@@ -1,7 +1,7 @@
 {
 	"Info" : 
 	{
-		"filename" : "DeckLink Duo (1)@1",
+		"Project_name" : "DeckLink Duo (1)@1",
 		"production" : "Tesseract Esports LLP",
 		"sdi_card" : "decklink",
 		"sdi_card_manufacturer" : "Blackmagic DeckLink"
@@ -10,7 +10,7 @@
 	[
 		{
 			"active_type" : "sdi",
-			"framerate" : "60000/1001",
+			"framerate" : 59.94,
 			"resolution" : 
 			{
 				"hight" : 1080,
@@ -22,8 +22,8 @@
 				{
 					"IPAddr" : "226.1.1.1",
 					"Port" : 1234,
-					"Protocol" : "udp",
 					"active" : "no",
+					"input_type" : "udp",
 					"sys_IP" : "192.168.1.125"
 				},
 				"SDI" : 
@@ -65,5 +65,11 @@
 			}
 		}
 	],
-	"channel" : 1
+	"channel" : 1,
+	"input" : 
+	[
+		{
+			"active_type" : null
+		}
+	]
 }

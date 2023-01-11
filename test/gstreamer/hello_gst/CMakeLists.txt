@@ -7,6 +7,7 @@ pkg_check_modules(GSTLIBS REQUIRED
         gstreamer-check-1.0
         )
 
+
 set(CMAKE_CXX_STANDARD 11)
 
 

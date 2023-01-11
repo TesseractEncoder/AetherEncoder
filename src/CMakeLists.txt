@@ -36,4 +36,3 @@ link_directories(${GSTLIBS_LIBRARY_DIRS} ${JSONCPP_LIBRARY_DIRS})
 add_executable(AetherEncoder ${SOURCE_FILES})
 
 target_link_libraries(AetherEncoder ${GSTLIBS_LIBRARIES} ${JSONCPP_LIBRARIES} Threads::Threads)
-

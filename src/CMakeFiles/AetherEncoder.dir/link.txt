@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/AetherEncoder.dir/AetherEncoder.cpp.o CMakeFiles/AetherEncoder.dir/gstreamer/gst.cpp.o CMakeFiles/AetherEncoder.dir/json/jsonParser.cpp.o  -o AetherEncoder   -L/usr/local/lib/x86_64-linux-gnu  -L/usr/local/lib  -Wl,-rpath,/usr/local/lib/x86_64-linux-gnu:/usr/local/lib -lgstcheck-1.0 -lm -lrt -lgstreamer-1.0 -lgobject-2.0 -lglib-2.0 -ljsoncpp -pthread 

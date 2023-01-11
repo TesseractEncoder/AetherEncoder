@@ -1,0 +1,4 @@
+gst-launch-1.0 videotestsrc ! video/x-raw,width=1920,height=1080,format=NV12,framerate=60000/1001 ! videoconvert ! video/x-raw,width=1920,height=1080,format=NV12 ! queue leaky=downstream max-size-buffers=3 ! interpipesink name=camsrc caps=video/x-raw,format=NV12 sync=true async=false
+
+
+gst-launch-1.0 interpipesrc listen-to=camsrc is-live=true allow-renegotiation=true stream-sync=restart-ts ! queue max-size-buffers=3 leaky=downstream ! videoconvert ! video/x-raw,format=NV12,width=1920,height=1080 ! videorate ! video/x-raw,framerate=60000/1001 ! nvh264enc bitrate=10000 ! rtph264pay ! udpsink host=226.1.1.1 port=23000

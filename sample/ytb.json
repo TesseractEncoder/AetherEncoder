@@ -1,0 +1,8 @@
+{
+	"active" : "start", 
+	"inputChannel": 1,
+	"youtubeNO" : 1,
+	"streamto": "monitor",		
+	"key" : "pfhm-da9z-3wa3-x4by-0ac2",
+	"link":"rtmp://a.rtmp.youtube.com/live2/x/pfhm-da9z-3wa3-x4by-0ac2"
+}

@@ -9,6 +9,10 @@ pkg_check_modules(GSTLIBS REQUIRED
 
 set(CMAKE_CXX_STANDARD 11)
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+#target_link_libraries(my_app PRIVATE Threads::Threads)
+
 
 # add extra include directories
 # gst-config.h moved to /usr/lib/x86_64-linux-gnu/gstreamer-1.0/include
@@ -30,5 +34,5 @@ link_directories(${GSTLIBS_LIBRARY_DIRS})
 
 add_executable(gstapp ${SOURCE_FILES})
 
-target_link_libraries(gstapp ${GSTLIBS_LIBRARIES})
+target_link_libraries(gstapp ${GSTLIBS_LIBRARIES} PRIVATE Threads::Threads)
 

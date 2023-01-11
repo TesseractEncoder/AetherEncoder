@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 
    // GE.P2 = gst_parse_launch("interpipesrc listen-to=camsrc is-live=true allow-renegotiation=true stream-sync=restart-ts ! queue ! videoconvert ! video/x-raw,format=NV12,width=1920,height=1080 ! videorate ! video/x-raw,framerate=60000/1001 ! nvh264enc bitrate=10000 ! h264parse config-interval=-1 ! mpegtsmux name=mux alignment=7 ! udpsink host=226.1.1.1 port=23000", &GE.error);
 
-    GE.P1 = gst_parse_launch("videotestsrc ! video/x-raw,width=1920,height=1080,format=NV12,framerate=60000/1001 ! videoconvert ! video/x-raw,width=1920,height=1080,format=NV12 ! videorate ! video/x-raw,framerate=60000/1001 ! nvh264enc bitrate=10000 ! h264parse config-interval=-1 ! mpegtsmux name=mux alignment=7 ! queue  ! interpipesink name=camsrc caps=video/x-raw,format=NV12 sync=true async=false", &GE.error);
+    GE.P1 = gst_parse_launch("videotestsrc ! video/x-raw,width=1920,height=1080,format=NV12,framerate=60000/1001 ! videoconvert ! video/x-raw,width=1920,height=1080,format=NV12 ! videorate ! video/x-raw,framerate=60000/1001 ! nvh264enc bitrate=10000 ! h264parse config-interval=-1 ! mpegtsmux name=mux alignment=7 ! queue ! interpipesink name=camsrc sync=true async=false", &GE.error);
 
     GE.P2 = gst_parse_launch("interpipesrc listen-to=camsrc is-live=true allow-renegotiation=true stream-sync=restart-ts ! udpsink host=226.1.1.1 port=23000", &GE.error);
 
@@ -112,9 +112,9 @@ int main(int argc, char *argv[])
     gst_bus_add_signal_watch (GE.bus2);
     gst_bus_add_signal_watch (GE.bus3);
    // g_signal_connect (G_OBJECT (bus), "message::error", (GCallback)error_cb, &data);
-    gst_object_unref (GE.bus1);
-    gst_object_unref (GE.bus2);
-    gst_object_unref (GE.bus3);
+   // gst_object_unref (GE.bus1);
+   // gst_object_unref (GE.bus2);
+   // gst_object_unref (GE.bus3);
     
     /* Start playing the pipeline */
     gst_element_set_state (GE.P1, GST_STATE_PLAYING);
@@ -128,9 +128,13 @@ int main(int argc, char *argv[])
     GE.loop1 = g_main_loop_new (NULL, FALSE);
     GE.loop2 = g_main_loop_new (NULL, FALSE);
     GE.loop3 = g_main_loop_new (NULL, FALSE);
+    cout<<"run loop 1"<<endl;
     g_main_loop_run (GE.loop1);
+    cout<<"run loop 2"<<endl;
     g_main_loop_run (GE.loop2);
+    cout<<"run loop 3"<<endl;
     g_main_loop_run (GE.loop3);
+    cout<<"run all loop"<<endl;
     
     /* Free resources */
     gst_element_set_state (GE.P1, GST_STATE_NULL);

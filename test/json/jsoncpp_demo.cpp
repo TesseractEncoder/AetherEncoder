@@ -14,6 +14,7 @@ int main() {
  
     //opening file using fstream
     ifstream file("sample.json");
+
  
     // check if there is any error is getting data from the json file
         if (!reader.parse(file, root)) {
